@@ -24,8 +24,32 @@ let currentPoll = {
     votesB: 0,
 };
 
-console.log(currentPoll);
-// set event listeners 
-  // get user input
-  // use user input to update state 
-  // update DOM to reflect the new state
+// set event listeners
+newPollFormEl.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(newPollFormEl);
+
+    // get user input
+    const userQuestion = formData.get('user-question-input');
+    const userOptionA = formData.get('option-a-input');
+    const userOptionB = formData.get('option-b-input');
+
+    // use user input to update state
+    currentPoll.question = userQuestion;
+    currentPoll.optionA = userOptionA;
+    currentPoll.optionB = userOptionB;
+
+    newPollFormEl.reset();
+
+    // update DOM to reflect the new state
+    displayCurrentPoll();
+});
+
+function displayCurrentPoll() {
+    currentPollQuestion.textContent = currentPoll.question;
+    optionAEl.textContent = currentPoll.optionA;
+    optionBEl.textContent = currentPoll.optionB;
+    optionAVoteCountEl.textContent = currentPoll.votesA;
+    optionBVoteCountEl.textContent = currentPoll.votesB;
+}
