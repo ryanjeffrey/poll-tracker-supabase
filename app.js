@@ -11,9 +11,6 @@ const optionBSubtractButton = document.getElementById('option-b-subtract');
 const optionBVoteCountEl = document.getElementById('option-b-vote-count');
 const optionBAddButton = document.getElementById('option-b-add');
 
-const closePollButton = document.getElementById('close-poll-button');
-
-const pastPollsDivEl = document.getElementById('past-polls-div');
 
 // let state
 let currentPoll = {
