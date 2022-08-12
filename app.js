@@ -46,6 +46,26 @@ newPollFormEl.addEventListener('submit', (e) => {
     displayCurrentPoll();
 });
 
+optionASubtractButton.addEventListener('click', () => {
+    currentPoll.votesA--;
+    optionAVoteCountEl.textContent = currentPoll.votesA;
+});
+
+optionAAddButton.addEventListener('click', () => {
+    currentPoll.votesA++;
+    optionAVoteCountEl.textContent = currentPoll.votesA;
+});
+
+optionBSubtractButton.addEventListener('click', () => {
+    currentPoll.votesB--;
+    optionBVoteCountEl.textContent = currentPoll.votesB;
+});
+
+optionBAddButton.addEventListener('click', () => {
+    currentPoll.votesB++;
+    optionBVoteCountEl.textContent = currentPoll.votesB;
+});
+
 function displayCurrentPoll() {
     currentPollQuestion.textContent = currentPoll.question;
     optionAEl.textContent = currentPoll.optionA;
