@@ -16,7 +16,15 @@ const closePollButton = document.getElementById('close-poll-button');
 const pastPollsDivEl = document.getElementById('past-polls-div');
 
 // let state
+let currentPoll = {
+    question: '-',
+    optionA: '',
+    optionB: '',
+    votesA: 0,
+    votesB: 0,
+};
 
+console.log(currentPoll);
 // set event listeners 
   // get user input
   // use user input to update state 
