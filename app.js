@@ -1,4 +1,7 @@
 // import functions and grab DOM elements
+import { createPoll, getPolls } from './fetch-utils.js';
+import { renderPoll } from './render-utils.js';
+
 const newPollFormEl = document.getElementById('new-poll-form');
 
 const currentPollQuestion = document.getElementById('current-poll-question');
@@ -11,6 +14,9 @@ const optionBSubtractButton = document.getElementById('option-b-subtract');
 const optionBVoteCountEl = document.getElementById('option-b-vote-count');
 const optionBAddButton = document.getElementById('option-b-add');
 
+const closePollButton = document.getElementById('close-poll-button');
+
+const pastPollEl = document.getElementById('past-polls-div');
 
 // let state
 let currentPoll = {
@@ -20,6 +26,8 @@ let currentPoll = {
     votesA: 0,
     votesB: 0,
 };
+
+let polls = [];
 
 // set event listeners
 newPollFormEl.addEventListener('submit', (e) => {
@@ -70,3 +78,32 @@ function displayCurrentPoll() {
     optionAVoteCountEl.textContent = currentPoll.votesA;
     optionBVoteCountEl.textContent = currentPoll.votesB;
 }
+
+closePollButton.addEventListener('click', async () => {
+    polls.push(currentPoll);
+    await createPoll(currentPoll);
+    
+    displayAllPolls();
+
+    currentPoll = {
+        question: '-',
+        optionA: '',
+        optionB: '',
+        votesA: 0,
+        votesB: 0,
+    };
+    displayCurrentPoll();
+});
+
+async function displayAllPolls() {
+    pastPollEl.textContent = '';
+
+    const polls = await getPolls();
+
+    for (let poll of polls) {
+        const pollEl = renderPoll(poll);
+        pastPollEl.append(pollEl);
+    }
+}
+
+displayAllPolls();
